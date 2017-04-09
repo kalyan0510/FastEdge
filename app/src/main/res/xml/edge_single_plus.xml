@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cocktail-provider previewImage="@mipmap/bg_notes"
+<cocktail-provider previewImage="@mipmap/preview"
     label="@string/label" description="@string/desc"
     cocktailWidth="550"
     configure="ac.iiti.gkalyan0510.fastedge.EditorActivity" />

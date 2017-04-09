@@ -73,7 +73,7 @@
 		</LinearLayout>
 	</LinearLayout>
 	<TextView
-		android:textSize="13sp"
+		android:textSize="15sp"
 		android:textStyle="bold"
 		android:textColor="#ffffff"
 		android:gravity="start"
@@ -84,7 +84,7 @@
 		android:paddingStart="2dp"
 		android:paddingEnd="2dp" />
 	<TextView
-		android:textSize="11sp"
+		android:textSize="13sp"
 		android:textColor="#ffffff"
 		android:gravity="start"
 		android:id="@+id/lldesc"
