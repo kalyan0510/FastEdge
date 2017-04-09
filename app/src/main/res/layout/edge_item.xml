@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:id="@+id/linearlo"
+
+	android:paddingTop="16dp"
+	android:paddingBottom="16dp"
+	android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	tools:context=".EditorActivity">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+        android:id="@+id/idid"
+        android:layout_margin="3dp"
+		android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<Button
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:id="@+id/calc"
+                android:layout_margin="3dp"
+
+				android:background="@mipmap/calc"
+				/>
+
+			<Button
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:id="@+id/clock"
+                android:layout_margin="3dp"
+
+				android:background="@mipmap/ic_launcher_clock"
+				/>
+			<Button
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+                android:layout_margin="3dp"
+				android:id="@+id/myfiles"
+				android:background="@mipmap/ic_launcher_myfiles"
+				/>
+		</LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:orientation="horizontal">
+			<Button
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:id="@+id/splanner"
+                android:layout_margin="3dp"
+                android:background="@mipmap/ic_launcher_splanner"
+				/>
+			<Button
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:id="@+id/gallery"
+                android:layout_margin="3dp"
+                android:background="@mipmap/n5_gallery"
+				/>
+			<Button
+				android:layout_width="40dp"
+                android:layout_margin="3dp"
+				android:layout_height="40dp"
+				android:id="@+id/chrome"
+				android:background="@mipmap/chrome"
+				/>
+		</LinearLayout>
+	</LinearLayout>
+	<TextView
+		android:textSize="13sp"
+		android:textStyle="bold"
+		android:textColor="#ffffff"
+		android:gravity="start"
+		android:id="@+id/lltit"
+		android:paddingBottom="3dp"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="2dp"
+		android:paddingEnd="2dp" />
+	<TextView
+		android:textSize="11sp"
+		android:textColor="#ffffff"
+		android:gravity="start"
+		android:id="@+id/lldesc"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="2dp"
+		android:paddingEnd="1dp" />
+	<TextView
+		android:textSize="13sp"
+		android:textStyle="bold"
+		android:textColor="#ffffff"
+		android:gravity="start"
+		android:layout_gravity="center"
+		android:id="@+id/lladd"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="✏ Add new »"
+
+		android:paddingEnd="2dp" />
+</LinearLayout>

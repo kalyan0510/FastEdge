@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FastEdge</string>
+    <string name="label">Fast &amp; Secure Notes</string>
+    <string name="desc">Allows you to make notes just by sliding edge</string>
+</resources>
