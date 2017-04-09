@@ -1,51 +1,21 @@
-/*
- * Decompiled with CFR 0_110.
- * 
- * Could not load the following classes:
- *  android.content.Context
- *  android.content.Intent
- *  android.os.Bundle
- *  android.support.annotation.Nullable
- *  android.support.v7.app.ActionBar
- *  android.support.v7.app.AppCompatActivity
- *  android.text.Editable
- *  android.view.Menu
- *  android.view.MenuInflater
- *  android.view.MenuItem
- *  android.view.View
- *  android.widget.EditText
- *  android.widget.Toast
- *  com.google.android.gms.ads.AdRequest
- *  com.google.android.gms.ads.AdRequest$Builder
- *  com.google.android.gms.ads.AdView
- *  com.google.gson.Gson
- *  java.lang.CharSequence
- *  java.lang.Class
- *  java.lang.Object
- *  java.lang.String
- */
+
 package ac.iiti.gkalyan0510.fastedge;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -54,7 +24,6 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
@@ -63,7 +32,6 @@ public class EditorActivity extends AppCompatActivity {
 
     private EditText description;
 
-    private MenuItem item;
     private Note note;
     private int position;
     private EditText title;
@@ -123,17 +91,16 @@ public class EditorActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-              // Log.v("TAG","Permission is granted");
+
                 return true;
             } else {
 
-               // Log.v(TAG,"Permission is revoked");
+
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
         }
-        else { //permission is automatically granted on sdk<23 upon installation
-          //  Log.v(TAG,"Permission is granted");
+        else {
             return true;
         }
     }
@@ -141,43 +108,7 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle bundle) {
         String string2 = getIntent().getStringExtra("note");
-        if(string2!=null && string2.length()==3){
-            // Toast.makeText(EditorActivity.this, "CaLcALCAlcaCLalclcla", Toast.LENGTH_SHORT).show();
-            PackageManager pm  = getPackageManager();
-            Intent i;
-            switch (string2){
-                case "cal":
-                    i = pm.getLaunchIntentForPackage(Constants.CALCULATOR_PACKAGE);
-                    break;
-                case "clo":
-                    i = pm.getLaunchIntentForPackage(Constants.CLOCK_PACKAGE_NAME);
-                    break;
-                case "myf":
-                    i = pm.getLaunchIntentForPackage("com.sec.android.app.myfiles");
-                    break;
-                case "spl":
-                    i = pm.getLaunchIntentForPackage(Constants.CALENDAR_PACKAGE_NAME);
-                    break;
-                case "gal":
-                    i = pm.getLaunchIntentForPackage("com.sec.android.gallery3d");
-                    break;
-                case "chr":
-                    i = pm.getLaunchIntentForPackage("com.android.chrome");
-                    break;
-                default:
-                    i = null;
-            }
 
-
-
-
-
-            if(i!=null){
-                i.addCategory(Intent.CATEGORY_LAUNCHER);
-                startActivity(i);
-                finish();}
-
-        }
         super.onCreate(bundle);
         this.setContentView(R.layout.activity_editor);
         isStoragePermissionGranted();
@@ -221,7 +152,7 @@ public class EditorActivity extends AppCompatActivity {
                     Intent.createChooser(intent, "Select a File to Upload"),
                     FILE_SELECT_CODE);
         } catch (android.content.ActivityNotFoundException ex) {
-            // Potentially direct the user to the Market with a Dialog
+
             Toast.makeText(this, "Please install a File Manager.",
                     Toast.LENGTH_SHORT).show();
         }
@@ -239,7 +170,7 @@ public class EditorActivity extends AppCompatActivity {
                     return cursor.getString(column_index);
                 }
             } catch (Exception e) {
-                // Eat it
+                e.printStackTrace();
             }
         }
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
@@ -249,23 +180,40 @@ public class EditorActivity extends AppCompatActivity {
         return null;
     }
 
+
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    public static String getStringFromFile (String filePath) throws Exception {
+        File fl = new File(filePath);
+        FileInputStream fin = new FileInputStream(fl);
+        String ret = convertStreamToString(fin);
+        fin.close();
+        return ret;
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case FILE_SELECT_CODE:
                 if (resultCode == RESULT_OK) {
-                    // Get the Uri of the selected file
+
                     Uri uri = data.getData();
-                    Log.d("TAG", "File Uri: " + uri.toString());
-                    // Get the path
+                   // Log.d("TAG", "File Uri: " + uri.toString());
+
                     String path = null;
                     try {
                         path = getPath(this, uri);
-                        //Toast.makeText(EditorActivity.this, path+"-", Toast.LENGTH_SHORT).show();
-                      //  Toast.makeText(EditorActivity.this, getStringFromFile(path), Toast.LENGTH_SHORT).show();
                         StorageManager.backup(this,"PreLoadBackup");
-                        StorageManager.load(this,BackUpExplorer.getStringFromFile(path));
-
+                        StorageManager.load(this,getStringFromFile(path));
+                        finish();
                     }
                     catch (URISyntaxException e) {
                         e.printStackTrace();
@@ -273,10 +221,7 @@ public class EditorActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Toast.makeText(EditorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    Log.d("TAG", "File Path: " + path);
-                    // Get the file instance
-                    // File file = new File(path);
-                    // Initiate the upload
+                   // Log.d("TAG", "File Path: " + path);
                 }
                 break;
         }
@@ -298,18 +243,17 @@ public class EditorActivity extends AppCompatActivity {
             return true;
         }
         else if (n == R.id.choose) {
+            Toast.makeText(EditorActivity.this, "goto DeviceStorage/Samsung/FastEdge", Toast.LENGTH_LONG).show();
             showFileChooser();
-           /* Intent intent = new Intent(this, BackUpExplorer.class);
-            intent.putExtra("path","/data/user/0/ac.iiti.gkalyan0510.fastedge/files/FastEdge/");
-            startActivity(intent);*/
+
             return true;
         }
         else {
-            //Toast.makeText(EditorActivity.this, "Bckpressed", Toast.LENGTH_SHORT).show();
+
             this.onBackPressed();
             return true;
         }
-        //return super.onOptionsItemSelected(menuItem);
+
     }
 
 }

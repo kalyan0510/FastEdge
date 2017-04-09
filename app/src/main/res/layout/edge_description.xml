@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/edgenotell"
+    android:text="@string/desc"
+    android:gravity="top|center"
+    android:paddingBottom="16dp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp" />

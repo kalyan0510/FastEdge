@@ -56,7 +56,6 @@ implements RemoteViewsService.RemoteViewsFactory {
             remoteViews.setViewVisibility(R.id.idid, View.GONE);
             remoteViews.setViewVisibility(R.id.lldesc, View.GONE);
             remoteViews.setViewVisibility(R.id.lladd, View.VISIBLE);
-           // Log.d("LOGG","CLICKED BUDDY");
             remoteViews.setOnClickFillInIntent(R.id.linearlo, new Intent(context,EditorActivity.class));
 
             return remoteViews;
@@ -90,9 +89,6 @@ implements RemoteViewsService.RemoteViewsFactory {
             intent.putExtra("note", "chr");
             remoteViews.setOnClickFillInIntent(R.id.chrome, intent);
 
-            //remoteViews.setOnClickFillInIntent(R.id.calc,i.addCategory(Intent.CATEGORY_LAUNCHER));
-            // remoteViews.setOnClickFillInIntent(R.id.calc, pm.getLaunchIntentForPackage("com.sec.android.app.popupcalculator"));
-            //remoteViews.setOnClickFillInIntent(R.id.clock, pm.getLaunchIntentForPackage("com.sec.android.app.clockpackage"));
             return remoteViews;
         }
         remoteViews.setViewVisibility(R.id.lltit,View.VISIBLE);

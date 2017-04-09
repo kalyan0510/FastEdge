@@ -40,9 +40,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 public class StorageManager {
-    /*
-     * Enabled aggressive block sorting
-     */
+
     public static void addNote(Context context, Note note) {
         ArrayList<Note> arrayList = StorageManager.getNotes(context);
         if (arrayList.contains(note)) {
@@ -115,38 +113,32 @@ public class StorageManager {
         String data = StorageManager.getPreferences(context).getString("list", null);
         if (data != null) {
 
-                // Get the directory for the user's public pictures directory.
 
-            // Create the folder.
             File folder = new File(Environment.getExternalStorageDirectory()+"/Samsung/FastEdge/");
             Log.d("LOG",folder.toString());
 
-            //Log.d("LOG HEREX",deleteDirectory(folder)+"");
             DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
             Date date = new Date();
-            //System.out.println(); //2016/11/16 12:08:43
-            // Create the file.
             Log.d("LOG XX MK",""+folder.mkdirs());
             File file = new File(folder, xx+"data_"+dateFormat.format(date).trim()+".html");
 
             Log.d("LOG XX",""+file.toString());
-                // Save your stream, don't forget to flush() it before closing it.
 
                 try
                 {
                     boolean x = file.createNewFile();
-                    //Log.d("LOG XXX1",""+file.createNewFile());
+
                     FileOutputStream fOut = new FileOutputStream(file);
-                   // Log.d("LOG XXX2",""+file.createNewFile());
+
                     OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-                    //Log.d("LOG XXX3",""+file.createNewFile());
+
                     myOutWriter.append(data);
-                    //Log.d("LOG XXX4",""+file.createNewFile());
+
                     myOutWriter.close();
 
                     fOut.flush();
                     fOut.close();
-                    //Log.d("LOG XXX5",""+file.createNewFile());
+
                    if(x)
                     Toast.makeText(context,"Stored at Samsung/FastEdge\n" , Toast.LENGTH_LONG).show();
                     else

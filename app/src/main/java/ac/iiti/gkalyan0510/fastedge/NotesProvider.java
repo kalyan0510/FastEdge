@@ -32,20 +32,28 @@ public class NotesProvider  extends SlookCocktailProvider {
             this.onUpdate(context, SlookCocktailManager.getInstance(context), arrn);
         }
     }
+    private static RemoteViews mLongClickStateView = null;
+    private RemoteViews createStateView(Context context) {
+        RemoteViews stateView = new RemoteViews(context.getPackageName(),
+                R.layout.edge_description);
+        //SlookCocktailManager.getInstance(context).setOnLongClickPendingIntent(stateView, R.id.state_btn1, getLongClickIntent(context, R.id.state_btn1, 0));
 
+        return stateView;
+    }
     @Override
     public void onUpdate(Context context, SlookCocktailManager slookCocktailManager, int[] arrn) {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(),R.layout.edge_notes);
         remoteViews.setRemoteAdapter( R.id.edgenotell, new Intent(context, (Class)NotesService.class));
 
-        remoteViews.setPendingIntentTemplate( R.id.edgenotell, PendingIntent.getActivity((Context)context, (int)0, (Intent)new Intent(context, (Class)EditorActivity.class), (int)PendingIntent.FLAG_UPDATE_CURRENT));
-        remoteViews.setPendingIntentTemplate( R.id.idid, PendingIntent.getActivity((Context)context, (int)0, (Intent)new Intent("com.andro.kid.OPENAPP"), (int)PendingIntent.FLAG_UPDATE_CURRENT));
+        remoteViews.setPendingIntentTemplate( R.id.edgenotell, PendingIntent.getBroadcast((Context)context, (int)0, (Intent)new Intent("com.andro.kid.OPENAPP"), (int)PendingIntent.FLAG_UPDATE_CURRENT));
 
-
+        if(mLongClickStateView == null) {
+            mLongClickStateView = createStateView(context);
+        }
         if (arrn != null) {
             for (int n : arrn) {
                 SlookCocktailManager.getInstance(context).notifyCocktailViewDataChanged(n,  R.id.edgenotell);
-                slookCocktailManager.updateCocktail(n, remoteViews);
+                slookCocktailManager.updateCocktail(n, remoteViews,mLongClickStateView);
             }
         }
     }
