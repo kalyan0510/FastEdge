@@ -1,12 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:id="@+id/edgenotell"
-    android:text="@string/desc"
-    android:gravity="top|center"
-    android:paddingBottom="16dp"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingStart="5dp"
-    android:paddingEnd="5dp" />
+    android:paddingEnd="5dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="9.0"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:id="@+id/mainText"
+            android:padding="3dp"
+            android:text=""
+            android:textSize="24sp"
+            android:gravity="left|center_vertical"
+            android:layout_gravity="top" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center">
+
+            <ImageButton
+                android:layout_width="20dp"
+                android:scaleType="fitXY"
+                android:layout_height="20dp"
+                android:background="@mipmap/edit"
+                android:id="@+id/mainEdit"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+
+        android:textSize="21sp"
+        android:textColor="#ffffff"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/mainNote"
+        android:layout_gravity="center"
+        android:layout_weight="1.15"
+        android:padding="10dp" />
+
+</LinearLayout>

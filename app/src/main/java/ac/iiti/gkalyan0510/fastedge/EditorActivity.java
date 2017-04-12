@@ -236,6 +236,10 @@ public class EditorActivity extends AppCompatActivity {
         }
         else if (n == R.id.delete) {
             this.delete();
+            Intent i = new Intent("com.jahertor.fastnotesedge.action.UPDATE_TEXT");
+            //i.putExtra("note",null);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            sendBroadcast(i);
             return true;
         }
         else if (n == R.id.backup) {

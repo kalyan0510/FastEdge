@@ -39,10 +39,14 @@ public class OpenApp extends BroadcastReceiver {
                     i = pm.getLaunchIntentForPackage("com.android.chrome");
                     break;
                 default:
-                    i = new Intent(context,EditorActivity.class);
+                    /*i = new Intent(context,EditorActivity.class);
                     i.putExtra("note",string2);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(i);
+                    context.startActivity(i);*/
+                    i = new Intent("com.jahertor.fastnotesedge.action.UPDATE_TEXT");
+                    i.putExtra("note",string2);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.sendBroadcast(i);
                     return;
 
             }
